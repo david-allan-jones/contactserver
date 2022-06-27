@@ -21,9 +21,11 @@ func main() {
 		Port:     appConfig.SmtpPort,
 		Password: appConfig.Password,
 	})
-	server.Start(
-		appConfig.HttpServerPort,
-		appConfig.HttpPath,
-		&client,
-	)
+	server.Start(server.ServerConfig{
+		Port:       appConfig.HttpServerPort,
+		Path:       appConfig.HttpPath,
+		TlsCert:    appConfig.TlsCert,
+		TlsKey:     appConfig.TlsKey,
+		SmtpClient: client,
+	})
 }

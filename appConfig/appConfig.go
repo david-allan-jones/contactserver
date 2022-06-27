@@ -14,6 +14,8 @@ type AppConfig struct {
 	Password       string
 	HttpServerPort int
 	HttpPath       string
+	TlsCert        string
+	TlsKey         string
 }
 
 func Create() (*AppConfig, error) {
@@ -35,5 +37,7 @@ func Create() (*AppConfig, error) {
 		Password:       os.Getenv("CONTACTSERVER_SMTP_PASSWORD"),
 		HttpPath:       os.Getenv("CONTACTSERVER_HTTP_PATH"),
 		HttpServerPort: httpPort,
+		TlsCert:        os.Getenv("TLS_CERT"),
+		TlsKey:         os.Getenv("TLS_KEY"),
 	}, nil
 }

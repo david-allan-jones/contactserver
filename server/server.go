@@ -18,8 +18,8 @@ func writeSuccessResponse(w http.ResponseWriter) {
 	json.NewEncoder(w).Encode(responseBody{true})
 }
 
-func Start(port int, path string, client *smtpclient.SmtpClient) {
-	http.HandleFunc(path, func(w http.ResponseWriter, r *http.Request) {
+func Start(config ServerConfig) {
+	http.HandleFunc(config.Path, func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
 		var reqBody requestBody
@@ -28,7 +28,7 @@ func Start(port int, path string, client *smtpclient.SmtpClient) {
 			writeFailureResponse(w, http.StatusBadRequest)
 			return
 		}
-		emailErr := client.SendEmail(smtpclient.EmailRequest{
+		emailErr := config.SmtpClient.SendEmail(smtpclient.EmailRequest{
 			Name:    reqBody.Name,
 			Contact: reqBody.Contact,
 			Message: reqBody.Message,
@@ -40,8 +40,8 @@ func Start(port int, path string, client *smtpclient.SmtpClient) {
 		writeSuccessResponse(w)
 	})
 
-	fmt.Printf("Starting server at %v:%v\n", path, port)
-	err := http.ListenAndServe(fmt.Sprintf(":%v", port), nil)
+	fmt.Printf("Starting server at %v:%v\n", config.Path, config.Port)
+	err := http.ListenAndServe(fmt.Sprintf(":%v", config.Port), nil)
 	if err != nil {
 		fmt.Printf("Error starting server:\n%v\n", err)
 	}

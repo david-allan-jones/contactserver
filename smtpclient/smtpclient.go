@@ -15,7 +15,7 @@ func CreateSmtpClient(config *SmtpClientConfig) SmtpClient {
 			m.SetHeader("From", config.Sender)
 
 			m.SetHeader("To", config.Receiver)
-			m.SetHeader("Subject", "New submission on Contact Me")
+			m.SetHeader("Subject", "New submission from Contact Server")
 			m.SetBody("text/html", fmt.Sprintf(`
 				<!DOCTYPE html>
 				<html>
