@@ -1,6 +1,7 @@
 package smtpclient
 
 type EmailRequest struct {
-	Subject string
-	Body    string
+	Name    string
+	Contact string
+	Message string
 }

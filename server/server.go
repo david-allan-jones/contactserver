@@ -29,8 +29,9 @@ func Start(port int, path string, client *smtpclient.SmtpClient) {
 			return
 		}
 		emailErr := client.SendEmail(smtpclient.EmailRequest{
-			Subject: reqBody.Subject,
-			Body:    reqBody.Body,
+			Name:    reqBody.Name,
+			Contact: reqBody.Contact,
+			Message: reqBody.Message,
 		})
 		if emailErr != nil {
 			writeFailureResponse(w, http.StatusInternalServerError)

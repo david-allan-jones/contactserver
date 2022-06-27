@@ -1,7 +1,7 @@
 package server
 
 type requestBody struct {
-	Receiver string
-	Subject  string
-	Body     string
+	Name    string `json:"name"`
+	Contact string `json:"contact"`
+	Message string `json:"message"`
 }

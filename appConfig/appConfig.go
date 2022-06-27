@@ -28,7 +28,7 @@ func Create() (*AppConfig, error) {
 	}
 
 	return &AppConfig{
-		SmtpSender:     os.Getenv("CONTACTSERVER_SMPT_SENDER"),
+		SmtpSender:     os.Getenv("CONTACTSERVER_SMTP_SENDER"),
 		SmtpReceiver:   os.Getenv("CONTACTSERVER_SMTP_RECEIVER"),
 		SmtpServer:     os.Getenv("CONTACTSERVER_SMTP_SERVER"),
 		SmtpPort:       smtpPort,
