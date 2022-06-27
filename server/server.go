@@ -41,8 +41,17 @@ func Start(config ServerConfig) {
 	})
 
 	fmt.Printf("Starting server at %v:%v\n", config.Path, config.Port)
-	err := http.ListenAndServe(fmt.Sprintf(":%v", config.Port), nil)
-	if err != nil {
-		fmt.Printf("Error starting server:\n%v\n", err)
+
+	portStr := fmt.Sprintf(":%v", config.Port)
+	if config.UseHttps {
+		err := http.ListenAndServeTLS(portStr, config.TlsCert, config.TlsKey, nil)
+		if err != nil {
+			fmt.Printf("Error starting HTTPS server:\n%v\n", err)
+		}
+	} else {
+		err := http.ListenAndServe(portStr, nil)
+		if err != nil {
+			fmt.Printf("Error starting HTTP server:\n%v\n", err)
+		}
 	}
 }
