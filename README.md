@@ -25,7 +25,7 @@ This should generate an executable at your current working directory, which can 
 | `CONTACTSERVER_TLS_CERT` | Path to the TLS certificate on your server. |
 | `CONTACTSERVER_TLS_KEY` | Path to the TLS private key on your server. |
 
-##Sending a Request
+## Sending a Request
 If the server is now running, it is time to try sending a request! The URL you should send your request to should print out to standard output when you run the executable. The endpoint accepts JSON and the body should appear in the following format
 
 ```json
