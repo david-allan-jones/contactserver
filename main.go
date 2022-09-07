@@ -22,7 +22,6 @@ func main() {
 		Password: appConfig.Password,
 	})
 	server.Start(server.ServerConfig{
-		Path:       appConfig.ServerPath,
 		UseHttps:   appConfig.UseHttps,
 		TlsCert:    appConfig.TlsCert,
 		TlsKey:     appConfig.TlsKey,

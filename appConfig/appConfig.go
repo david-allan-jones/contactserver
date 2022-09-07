@@ -12,7 +12,6 @@ type AppConfig struct {
 	SmtpServer   string
 	SmtpPort     int
 	Password     string
-	ServerPath   string
 	UseHttps     bool
 	TlsCert      string
 	TlsKey       string
@@ -35,7 +34,6 @@ func Create() (*AppConfig, error) {
 		SmtpServer:   os.Getenv("CONTACTSERVER_SMTP_SERVER"),
 		SmtpPort:     smtpPort,
 		Password:     os.Getenv("CONTACTSERVER_SMTP_PASSWORD"),
-		ServerPath:   os.Getenv("CONTACTSERVER_SERVER_PATH"),
 		UseHttps:     useHttps,
 		TlsCert:      os.Getenv("TLS_CERT"),
 		TlsKey:       os.Getenv("TLS_KEY"),

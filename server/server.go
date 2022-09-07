@@ -15,6 +15,13 @@ func getPort(useHttps bool) int {
 	return 80
 }
 
+func getProtocol(useHttps bool) string {
+	if useHttps {
+		return "https"
+	}
+	return "http"
+}
+
 func writeFailureResponse(w http.ResponseWriter, statusCode int) {
 	w.WriteHeader(statusCode)
 	json.NewEncoder(w).Encode(responseBody{false})
@@ -26,7 +33,8 @@ func writeSuccessResponse(w http.ResponseWriter) {
 }
 
 func Start(config ServerConfig) {
-	http.HandleFunc(config.Path, func(w http.ResponseWriter, r *http.Request) {
+	path := "/contact"
+	http.HandleFunc(path, func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
 		var reqBody requestBody
@@ -48,7 +56,8 @@ func Start(config ServerConfig) {
 	})
 
 	port := getPort(config.UseHttps)
-	fmt.Printf("Starting server at %v:%v\n", config.Path, port)
+	protocol := getProtocol(config.UseHttps)
+	fmt.Printf("Starting server at %v://localhost:%v%v\n", protocol, port, path)
 	portStr := fmt.Sprintf(":%v", port)
 	if config.UseHttps {
 		err := http.ListenAndServeTLS(portStr, config.TlsCert, config.TlsKey, nil)
