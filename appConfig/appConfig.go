@@ -23,7 +23,7 @@ func Create() (*AppConfig, error) {
 		return nil, errors.New("CONTACTSERVER_SMTP_PORT env variable needs to be a number")
 	}
 
-	useHttps, useHttpsErr := strconv.ParseBool(os.Getenv("USE_HTTPS"))
+	useHttps, useHttpsErr := strconv.ParseBool(os.Getenv("CONTACTSERVER_USE_HTTPS"))
 	if useHttpsErr != nil {
 		return nil, errors.New("USE_HTTPS env variable needs to be a boolean")
 	}
@@ -35,7 +35,7 @@ func Create() (*AppConfig, error) {
 		SmtpPort:     smtpPort,
 		Password:     os.Getenv("CONTACTSERVER_SMTP_PASSWORD"),
 		UseHttps:     useHttps,
-		TlsCert:      os.Getenv("TLS_CERT"),
-		TlsKey:       os.Getenv("TLS_KEY"),
+		TlsCert:      os.Getenv("CONTACTSERVER_TLS_CERT"),
+		TlsKey:       os.Getenv("CONTACTSERVER_TLS_KEY"),
 	}, nil
 }
