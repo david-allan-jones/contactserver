@@ -8,6 +8,13 @@ import (
 	"github.com/david-allan-jones/contactserver/smtpclient"
 )
 
+func getPort(useHttps bool) int {
+	if useHttps {
+		return 443
+	}
+	return 80
+}
+
 func writeFailureResponse(w http.ResponseWriter, statusCode int) {
 	w.WriteHeader(statusCode)
 	json.NewEncoder(w).Encode(responseBody{false})
@@ -40,9 +47,9 @@ func Start(config ServerConfig) {
 		writeSuccessResponse(w)
 	})
 
-	fmt.Printf("Starting server at %v:%v\n", config.Path, config.Port)
-
-	portStr := fmt.Sprintf(":%v", config.Port)
+	port := getPort(config.UseHttps)
+	fmt.Printf("Starting server at %v:%v\n", config.Path, port)
+	portStr := fmt.Sprintf(":%v", port)
 	if config.UseHttps {
 		err := http.ListenAndServeTLS(portStr, config.TlsCert, config.TlsKey, nil)
 		if err != nil {

@@ -12,7 +12,6 @@ type AppConfig struct {
 	SmtpServer   string
 	SmtpPort     int
 	Password     string
-	ServerPort   int
 	ServerPath   string
 	UseHttps     bool
 	TlsCert      string
@@ -23,11 +22,6 @@ func Create() (*AppConfig, error) {
 	smtpPort, smtpPortErr := strconv.Atoi(os.Getenv("CONTACTSERVER_SMTP_PORT"))
 	if smtpPortErr != nil {
 		return nil, errors.New("CONTACTSERVER_SMTP_PORT env variable needs to be a number")
-	}
-
-	serverPort, serverPortErr := strconv.Atoi(os.Getenv("CONTACTSERVER_SERVER_PORT"))
-	if serverPortErr != nil {
-		return nil, errors.New("CONTACTSERVER_SERVER_PORT env variable needs to be a number")
 	}
 
 	useHttps, useHttpsErr := strconv.ParseBool(os.Getenv("USE_HTTPS"))
@@ -42,7 +36,6 @@ func Create() (*AppConfig, error) {
 		SmtpPort:     smtpPort,
 		Password:     os.Getenv("CONTACTSERVER_SMTP_PASSWORD"),
 		ServerPath:   os.Getenv("CONTACTSERVER_SERVER_PATH"),
-		ServerPort:   serverPort,
 		UseHttps:     useHttps,
 		TlsCert:      os.Getenv("TLS_CERT"),
 		TlsKey:       os.Getenv("TLS_KEY"),
