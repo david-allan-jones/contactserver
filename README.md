@@ -9,7 +9,7 @@ Since the server is written in Go, you will need to have a Go compiler installed
 
 Once Go is installed, you should be able to compile the source code by running the following command at the root.
 ```
-go run main.go
+go build main.go
 ```
 This should generate an executable at your current working directory, which can then be run to start the server. You may see some errors if you try to run the program without configuring the environment properly. The next section covers all the necessary environment variables to get the server ready for end-to-end service.
 
