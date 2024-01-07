@@ -43,4 +43,4 @@ If the server received the request it will output some information to standard o
 ```
 If the response shows that it did not succeed, try checking the console on the server for troubleshooting.
 ## Contact
-If you would like to contact the author, please visit https://www.davidjonesdev.com/contact and leave a message via the contact form there.
+If you would like to contact the author, please visit [my website](https://david-allan-jones.github.io/personal-website/contact) and leave a message via the contact form there.
